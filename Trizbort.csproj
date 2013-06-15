@@ -19,6 +19,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,10 +33,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppSettingsDialog.Designer.cs">
+      <DependentUpon>AppSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Automap.cs" />
     <Compile Include="AutomapBar.cs">
@@ -157,6 +163,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppSettingsDialog.resx">
+      <DependentUpon>AppSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AutomapBar.resx">
       <DependentUpon>AutomapBar.cs</DependentUpon>

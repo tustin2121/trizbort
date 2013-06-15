@@ -682,7 +682,12 @@ namespace Trizbort
 
         private void ProjectSettingsMenuItem_Click(object sender, EventArgs e)
         {
-            Settings.ShowDialog();
+            Settings.ShowMapDialog();
+        }
+
+		private void ApplicationSettingsMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.ShowAppDialog();
         }
 
         private void ProjectResetToDefaultSettingsMenuItem_Click(object sender, EventArgs e)

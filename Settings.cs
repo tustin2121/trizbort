@@ -49,6 +49,8 @@ namespace Trizbort
             s_infiniteScrollBounds = false;
             s_showMinimap = true;
             s_recentProjects.Clear();
+			s_invertMouseWheel = false;
+			s_dragButton = 0;
             // TODO: add other application settings here
         }
 
@@ -68,6 +70,8 @@ namespace Trizbort
                         {
                             s_dontCareAboutVersion = new Version(versionText);
                         }
+						s_dragButton = root["dragButton"].ToInt(s_dragButton);
+						s_invertMouseWheel = root["invertMouseWheel"].ToBool(s_invertMouseWheel);
                         s_infiniteScrollBounds = root["infiniteScrollBounds"].ToBool(s_infiniteScrollBounds);
                         s_showMinimap = root["showMiniMap"].ToBool(s_showMinimap);
 
@@ -120,6 +124,8 @@ namespace Trizbort
                 {
                     scribe.StartElement("settings");
                     scribe.Element("dontCareAboutVersion", s_dontCareAboutVersion.ToString());
+					scribe.Element("dragButton", s_dragButton);
+					scribe.Element("invertMouseWheel", s_invertMouseWheel);
                     scribe.Element("infiniteScrollBounds", s_infiniteScrollBounds);
                     scribe.Element("showMiniMap", s_showMinimap);
 
@@ -476,7 +482,21 @@ namespace Trizbort
             }
         }
 
-        public static void ShowDialog()
+		public static void ShowAppDialog() 
+		{
+			using (var dialog = new AppSettingsDialog()) 
+			{
+				dialog.InvertMouseWheel = InvertMouseWheel;
+				dialog.MouseDragButton = MouseDragButton;
+				if (dialog.ShowDialog() == DialogResult.OK) 
+				{
+					InvertMouseWheel = dialog.InvertMouseWheel;
+					MouseDragButton = dialog.MouseDragButton;
+				}
+			}
+		}
+
+        public static void ShowMapDialog()
         {
             using (var dialog = new SettingsDialog())
             {
@@ -837,6 +857,18 @@ namespace Trizbort
             set { s_automap = value; }
         }
 
+		public static int MouseDragButton 
+		{
+			get { return s_dragButton; }
+			set { s_dragButton = value; }
+		}
+
+		public static bool InvertMouseWheel 
+		{
+			get { return s_invertMouseWheel; }
+			set { s_invertMouseWheel = value; }
+		}
+
         public static bool InfiniteScrollBounds
         {
             get { return s_infiniteScrollBounds; }
@@ -914,6 +946,8 @@ namespace Trizbort
         // application settings, saved for the user
         private static Version s_dontCareAboutVersion;
         private static AutomapSettings s_automap;
+		private static int s_dragButton;
+		private static bool s_invertMouseWheel;
         private static bool s_infiniteScrollBounds;
         private static bool s_showMinimap;
         private static string s_lastProjectFileName;
